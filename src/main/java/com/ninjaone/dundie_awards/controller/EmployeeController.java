@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping()
+@RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
@@ -43,21 +43,21 @@ public class EmployeeController {
     private AwardsCache awardsCache;
 
     // get all employees
-    @GetMapping("/employees")
+    @GetMapping
     @ResponseBody
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
     // create employee rest api
-    @PostMapping("/employees")
+    @PostMapping
     @ResponseBody
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeRepository.save(employee);
     }
 
     // get employee by id rest api
-    @GetMapping("/employees/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
@@ -69,7 +69,7 @@ public class EmployeeController {
     }
 
     // update employee rest api
-    @PutMapping("/employees/{id}")
+    @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employeeDetails) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
@@ -86,7 +86,7 @@ public class EmployeeController {
     }
 
     // delete employee rest api
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable("id") Long id) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
